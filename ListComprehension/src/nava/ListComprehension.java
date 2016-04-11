@@ -1,6 +1,7 @@
-package cannata;
+package nava;
 
 import java.util.*;
+import java.lang.*;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -31,7 +32,42 @@ public class ListComprehension {
         List<Object> e24 = Arrays.asList(9, "CATSKILL", "ANTOINETTE", "CATSKIAW", "9-FEB-92", "", "WAREHOUSE MANAGER", 1700, 0, 44, 2);
         emp.add(e1); emp.add(e2); emp.add(e3);emp.add(e4);emp.add(e5);emp.add(e6);emp.add(e7);emp.add(e8);emp.add(e9);emp.add(e10);emp.add(e11);emp.add(e12);emp.add(e13);emp.add(e14);emp.add(e15);emp.add(e16);emp.add(e17);
         emp.add(e18);emp.add(e19);emp.add(e20);emp.add(e21);emp.add(e22);emp.add(e23);emp.add(e24);
+
+        System.out.println("1) print ename and sal");
         emp.stream()
-                .forEach(e -> { System.out.println(e); });
+                .forEach(e -> { System.out.println(e.get(1)+" "+e.get(7)); });
+        System.out.println();
+
+        System.out.println("2) print ename and sal where sal>1000");
+        emp.stream()
+                .filter(e -> (int) e.get(7)>1000)
+                .forEach(e -> { System.out.println(e.get(1)+" "+e.get(7)); });
+        System.out.println();
+
+        System.out.println("3) print out dept. # for sal>1000");
+        emp.stream()
+                .filter(e -> (int) e.get(7)>1500)
+                .mapToInt(e -> (int) e.get(10))
+                .forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("4) print sorted last names for STOCK CLERK");
+        emp.stream()
+                .filter(e -> (String) e.get(6)=="STOCK CLERK")
+                .map(e -> (String) e.get(1))
+                .sorted()
+                .forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("5)filtered based on dept. # then sorted by salary");
+        emp.stream()
+                .filter(e -> (int) e.get(10)==3)
+                .map(e -> (int) e.get(7))
+                .sorted()
+                .forEach(System.out::println);
+        System.out.println();
+
+
+
     }
 }
