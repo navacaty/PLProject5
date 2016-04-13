@@ -1,0 +1,284 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> LINUX
+Rule 2     start -> cpu
+Rule 3     start -> all
+Rule 4     start -> empty
+Rule 5     start -> data
+Rule 6     time -> INTEGER : INTEGER : INTEGER AMPM
+Rule 7     cpu -> time CPU
+Rule 8     all -> time ALL
+Rule 9     data -> time INTEGER float float float float float float float float float
+Rule 10    float -> INTEGER . INTEGER
+Rule 11    empty -> <empty>
+
+Terminals, with rules where they appear
+
+.                    : 10
+:                    : 6 6
+ALL                  : 8
+AMPM                 : 6
+CPU                  : 7
+INTEGER              : 6 6 6 9 10 10
+LINUX                : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+all                  : 3
+cpu                  : 2
+data                 : 5
+empty                : 4
+float                : 9 9 9 9 9 9 9 9 9
+start                : 0
+time                 : 7 8 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . LINUX
+    (2) start -> . cpu
+    (3) start -> . all
+    (4) start -> . empty
+    (5) start -> . data
+    (7) cpu -> . time CPU
+    (8) all -> . time ALL
+    (11) empty -> .
+    (9) data -> . time INTEGER float float float float float float float float float
+    (6) time -> . INTEGER : INTEGER : INTEGER AMPM
+
+    LINUX           shift and go to state 4
+    $end            reduce using rule 11 (empty -> .)
+    INTEGER         shift and go to state 5
+
+    all                            shift and go to state 1
+    start                          shift and go to state 3
+    time                           shift and go to state 2
+    data                           shift and go to state 6
+    cpu                            shift and go to state 7
+    empty                          shift and go to state 8
+
+state 1
+
+    (3) start -> all .
+
+    $end            reduce using rule 3 (start -> all .)
+
+
+state 2
+
+    (7) cpu -> time . CPU
+    (8) all -> time . ALL
+    (9) data -> time . INTEGER float float float float float float float float float
+
+    CPU             shift and go to state 11
+    ALL             shift and go to state 10
+    INTEGER         shift and go to state 9
+
+
+state 3
+
+    (0) S' -> start .
+
+
+
+state 4
+
+    (1) start -> LINUX .
+
+    $end            reduce using rule 1 (start -> LINUX .)
+
+
+state 5
+
+    (6) time -> INTEGER . : INTEGER : INTEGER AMPM
+
+    :               shift and go to state 12
+
+
+state 6
+
+    (5) start -> data .
+
+    $end            reduce using rule 5 (start -> data .)
+
+
+state 7
+
+    (2) start -> cpu .
+
+    $end            reduce using rule 2 (start -> cpu .)
+
+
+state 8
+
+    (4) start -> empty .
+
+    $end            reduce using rule 4 (start -> empty .)
+
+
+state 9
+
+    (9) data -> time INTEGER . float float float float float float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 14
+
+state 10
+
+    (8) all -> time ALL .
+
+    $end            reduce using rule 8 (all -> time ALL .)
+
+
+state 11
+
+    (7) cpu -> time CPU .
+
+    $end            reduce using rule 7 (cpu -> time CPU .)
+
+
+state 12
+
+    (6) time -> INTEGER : . INTEGER : INTEGER AMPM
+
+    INTEGER         shift and go to state 15
+
+
+state 13
+
+    (10) float -> INTEGER . . INTEGER
+
+    .               shift and go to state 16
+
+
+state 14
+
+    (9) data -> time INTEGER float . float float float float float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 17
+
+state 15
+
+    (6) time -> INTEGER : INTEGER . : INTEGER AMPM
+
+    :               shift and go to state 18
+
+
+state 16
+
+    (10) float -> INTEGER . . INTEGER
+
+    INTEGER         shift and go to state 19
+
+
+state 17
+
+    (9) data -> time INTEGER float float . float float float float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 20
+
+state 18
+
+    (6) time -> INTEGER : INTEGER : . INTEGER AMPM
+
+    INTEGER         shift and go to state 21
+
+
+state 19
+
+    (10) float -> INTEGER . INTEGER .
+
+    INTEGER         reduce using rule 10 (float -> INTEGER . INTEGER .)
+    $end            reduce using rule 10 (float -> INTEGER . INTEGER .)
+
+
+state 20
+
+    (9) data -> time INTEGER float float float . float float float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 22
+
+state 21
+
+    (6) time -> INTEGER : INTEGER : INTEGER . AMPM
+
+    AMPM            shift and go to state 23
+
+
+state 22
+
+    (9) data -> time INTEGER float float float float . float float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 24
+
+state 23
+
+    (6) time -> INTEGER : INTEGER : INTEGER AMPM .
+
+    CPU             reduce using rule 6 (time -> INTEGER : INTEGER : INTEGER AMPM .)
+    ALL             reduce using rule 6 (time -> INTEGER : INTEGER : INTEGER AMPM .)
+    INTEGER         reduce using rule 6 (time -> INTEGER : INTEGER : INTEGER AMPM .)
+
+
+state 24
+
+    (9) data -> time INTEGER float float float float float . float float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 25
+
+state 25
+
+    (9) data -> time INTEGER float float float float float float . float float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 26
+
+state 26
+
+    (9) data -> time INTEGER float float float float float float float . float float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 27
+
+state 27
+
+    (9) data -> time INTEGER float float float float float float float float . float
+    (10) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 13
+
+    float                          shift and go to state 28
+
+state 28
+
+    (9) data -> time INTEGER float float float float float float float float float .
+
+    $end            reduce using rule 9 (data -> time INTEGER float float float float float float float float float .)
+
