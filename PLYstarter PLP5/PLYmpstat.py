@@ -7,14 +7,15 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('LINUX', 'CPU', 'ALL', 'AMPM', 'INTEGER')
-literals = ['.', ':'  ]
+tokens = ('LINUX', 'CPU', 'ALL', 'AMPM', 'INTEGER','DATE')
+literals = ['.', ':', '/'  ]
 
 # Tokens
 t_LINUX  = r'^Linux.*$'
 t_CPU    = r'CPU.*$'
 t_ALL    = r'all.*$'
 t_AMPM   = r'[AP]M'
+t_DATE   = r'Dates.*$'
 
 def t_INTEGER(t):
     r'\d+'
@@ -51,12 +52,19 @@ def p_start(t):
              | all
              | empty
              | data
+             | date
+             | DATE
     '''
     #print "Saw: ", t[1]
 
 def p_time(t):
-    'time : INTEGER ":" INTEGER ":" INTEGER AMPM'
-    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5]) + " " + str(t[6])
+    'time : INTEGER ":" INTEGER'
+    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5])
+
+def p_date(t):
+    'date : INTEGER "/" INTEGER "/" INTEGER time'
+    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5]) + str(t[6])
+
 
 def p_cpu(t):
     'cpu : time CPU'
