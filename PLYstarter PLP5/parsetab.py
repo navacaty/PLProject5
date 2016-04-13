@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '0919EF11B3ECA7661CC3D2195BBACD13'
+_lr_signature = '80B3DCD07D1A0658E32B7EDF633EF855'
     
-_lr_action_items = {'ALL':([3,18,],[12,-8,]),'/':([7,19,],[15,22,]),'.':([16,],[20,]),'LINUX':([0,],[5,]),'DATE':([0,],[2,]),'INTEGER':([0,3,11,14,15,17,18,20,21,22,23,24,25,26,29,30,31,32,],[7,11,16,18,19,16,-8,23,16,25,-13,16,27,16,16,16,16,16,]),':':([7,27,],[14,14,]),'CPU':([3,18,],[13,-8,]),'$end':([0,1,2,4,5,6,8,9,10,12,13,18,23,28,33,],[-14,-3,-7,0,-1,-6,-5,-2,-4,-11,-10,-8,-13,-9,-12,]),}
+_lr_action_items = {'STRING':([0,9,11,13,15,20,],[2,13,16,-9,19,-7,]),'-':([2,3,14,16,],[9,10,18,9,]),'DATE':([0,],[1,]),'INTEGER':([0,5,10,17,18,21,],[3,12,14,20,21,-8,]),':':([12,],[17,]),'$end':([0,1,2,4,5,6,7,8,13,19,21,],[-11,-4,-6,0,-3,-5,-2,-1,-9,-10,-8,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'all':([0,],[1,]),'float':([11,17,21,24,26,29,30,31,32,],[17,21,24,26,29,30,31,32,33,]),'start':([0,],[4,]),'time':([0,25,],[3,28,]),'date':([0,],[6,]),'data':([0,],[8,]),'cpu':([0,],[9,]),'empty':([0,],[10,]),}
+_lr_goto_items = {'start':([0,],[4,]),'time':([5,],[11,]),'date':([0,],[5,]),'offense':([0,11,],[6,15,]),'data':([0,],[7,]),'empty':([0,],[8,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,18 +26,15 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> LINUX','start',1,'p_start','PLYmpstat.py',50),
-  ('start -> cpu','start',1,'p_start','PLYmpstat.py',51),
-  ('start -> all','start',1,'p_start','PLYmpstat.py',52),
-  ('start -> empty','start',1,'p_start','PLYmpstat.py',53),
-  ('start -> data','start',1,'p_start','PLYmpstat.py',54),
-  ('start -> date','start',1,'p_start','PLYmpstat.py',55),
-  ('start -> DATE','start',1,'p_start','PLYmpstat.py',56),
-  ('time -> INTEGER : INTEGER','time',3,'p_time','PLYmpstat.py',61),
-  ('date -> INTEGER / INTEGER / INTEGER time','date',6,'p_date','PLYmpstat.py',65),
-  ('cpu -> time CPU','cpu',2,'p_cpu','PLYmpstat.py',70),
-  ('all -> time ALL','all',2,'p_all','PLYmpstat.py',74),
-  ('data -> time INTEGER float float float float float float float float float','data',11,'p_data','PLYmpstat.py',78),
-  ('float -> INTEGER . INTEGER','float',3,'p_float','PLYmpstat.py',82),
-  ('empty -> <empty>','empty',0,'p_empty','PLYmpstat.py',86),
+  ('start -> empty','start',1,'p_start','PLYmpstat.py',56),
+  ('start -> data','start',1,'p_start','PLYmpstat.py',57),
+  ('start -> date','start',1,'p_start','PLYmpstat.py',58),
+  ('start -> DATE','start',1,'p_start','PLYmpstat.py',59),
+  ('start -> offense','start',1,'p_start','PLYmpstat.py',60),
+  ('start -> STRING','start',1,'p_start','PLYmpstat.py',61),
+  ('time -> INTEGER : INTEGER','time',3,'p_time','PLYmpstat.py',66),
+  ('date -> INTEGER - INTEGER - INTEGER','date',5,'p_date','PLYmpstat.py',70),
+  ('offense -> STRING - STRING','offense',3,'p_offense','PLYmpstat.py',74),
+  ('data -> date time offense STRING','data',4,'p_data','PLYmpstat.py',79),
+  ('empty -> <empty>','empty',0,'p_empty','PLYmpstat.py',84),
 ]

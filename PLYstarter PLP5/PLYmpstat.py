@@ -7,15 +7,12 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('LINUX', 'CPU', 'ALL', 'AMPM', 'INTEGER','DATE')
-literals = ['.', ':', '/'  ]
+tokens = ('INTEGER','STRING','DATE')
+literals = ['.', ':','-']
 
 # Tokens
-t_LINUX  = r'^Linux.*$'
-t_CPU    = r'CPU.*$'
-t_ALL    = r'all.*$'
-t_AMPM   = r'[AP]M'
 t_DATE   = r'Dates.*$'
+t_STRING = r'[A-Z_].*$'
 
 def t_INTEGER(t):
     r'\d+'
@@ -26,8 +23,17 @@ def t_INTEGER(t):
         t.value = 0
     return t
 
+'''def t_STRING(t):
+    r'\d+'
+    try:
+        t.value = str(t.value)
+    except ValueError:
+        print("String value too large %d", t.value)
+        t.value = 0
+    return t'''
+
 # Ignored characters
-t_ignore = " \r"
+t_ignore = " \t"
 
 def t_newline(t):
     r'\n+'
@@ -47,40 +53,32 @@ global time_step
 time_step = 0
 
 def p_start(t):
-    '''start : LINUX
-             | cpu
-             | all
-             | empty
+    '''start : empty
              | data
              | date
              | DATE
+             | offense
+             | STRING
     '''
-    #print "Saw: ", t[1]
+    print t[1]
 
 def p_time(t):
     'time : INTEGER ":" INTEGER'
-    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5])
+    t[0] = str(t[1]) + str(t[2]) + str(t[3])
 
 def p_date(t):
-    'date : INTEGER "/" INTEGER "/" INTEGER time'
-    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5]) + str(t[6])
+    'date : INTEGER "-" INTEGER "-" INTEGER'
+    t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4]) + str(t[5])
 
+def p_offense(t):
+    'offense : STRING "-" STRING'
+    t[0] = str(t[1]) + str(t[2]) +str(t[3])
 
-def p_cpu(t):
-    'cpu : time CPU'
-    t[0] = str(t[1]) + str(t[2])
-
-def p_all(t):
-    'all : time ALL'
-    t[0] = str(t[1]) + str(t[2])
 
 def p_data(t):
-    'data : time INTEGER float float float float float float float float float'
-    print "Saw a Data Line With : " + str(t[2]) + ", " + str(t[10]) + ", " + str(t[11])
+    'data : date time offense STRING'
+    print "Saw a Data Line With : " + str(t[2])
 
-def p_float(t):
-    'float : INTEGER "." INTEGER'
-    t[0] = str(t[1]) + str(t[2]) + str(t[3])
 
 def p_empty(t):
     'empty : '
