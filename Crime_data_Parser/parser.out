@@ -1,0 +1,248 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> HEADER1
+Rule 2     start -> empty
+Rule 3     start -> data
+Rule 4     start -> date
+Rule 5     start -> DATE
+Rule 6     start -> offense
+Rule 7     start -> day
+Rule 8     date -> INTEGER - INTEGER - INTEGER
+Rule 9     time -> INTEGER : INTEGER
+Rule 10    offense -> STRING - STRING
+Rule 11    day -> STRING
+Rule 12    data -> date time offense day
+Rule 13    empty -> <empty>
+
+Terminals, with rules where they appear
+
+-                    : 8 8 10
+:                    : 9
+DATE                 : 5
+HEADER1              : 1
+INTEGER              : 8 8 8 9 9
+STRING               : 10 10 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+data                 : 3
+date                 : 4 12
+day                  : 7 12
+empty                : 2
+offense              : 6 12
+start                : 0
+time                 : 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . HEADER1
+    (2) start -> . empty
+    (3) start -> . data
+    (4) start -> . date
+    (5) start -> . DATE
+    (6) start -> . offense
+    (7) start -> . day
+    (13) empty -> .
+    (12) data -> . date time offense day
+    (8) date -> . INTEGER - INTEGER - INTEGER
+    (10) offense -> . STRING - STRING
+    (11) day -> . STRING
+
+    HEADER1         shift and go to state 5
+    DATE            shift and go to state 1
+    $end            reduce using rule 13 (empty -> .)
+    INTEGER         shift and go to state 3
+    STRING          shift and go to state 2
+
+    start                          shift and go to state 4
+    date                           shift and go to state 6
+    offense                        shift and go to state 7
+    data                           shift and go to state 8
+    day                            shift and go to state 9
+    empty                          shift and go to state 10
+
+state 1
+
+    (5) start -> DATE .
+
+    $end            reduce using rule 5 (start -> DATE .)
+
+
+state 2
+
+    (10) offense -> STRING . - STRING
+    (11) day -> STRING .
+
+    -               shift and go to state 11
+    $end            reduce using rule 11 (day -> STRING .)
+
+
+state 3
+
+    (8) date -> INTEGER . - INTEGER - INTEGER
+
+    -               shift and go to state 12
+
+
+state 4
+
+    (0) S' -> start .
+
+
+
+state 5
+
+    (1) start -> HEADER1 .
+
+    $end            reduce using rule 1 (start -> HEADER1 .)
+
+
+state 6
+
+    (4) start -> date .
+    (12) data -> date . time offense day
+    (9) time -> . INTEGER : INTEGER
+
+    $end            reduce using rule 4 (start -> date .)
+    INTEGER         shift and go to state 14
+
+    time                           shift and go to state 13
+
+state 7
+
+    (6) start -> offense .
+
+    $end            reduce using rule 6 (start -> offense .)
+
+
+state 8
+
+    (3) start -> data .
+
+    $end            reduce using rule 3 (start -> data .)
+
+
+state 9
+
+    (7) start -> day .
+
+    $end            reduce using rule 7 (start -> day .)
+
+
+state 10
+
+    (2) start -> empty .
+
+    $end            reduce using rule 2 (start -> empty .)
+
+
+state 11
+
+    (10) offense -> STRING - . STRING
+
+    STRING          shift and go to state 15
+
+
+state 12
+
+    (8) date -> INTEGER - . INTEGER - INTEGER
+
+    INTEGER         shift and go to state 16
+
+
+state 13
+
+    (12) data -> date time . offense day
+    (10) offense -> . STRING - STRING
+
+    STRING          shift and go to state 17
+
+    offense                        shift and go to state 18
+
+state 14
+
+    (9) time -> INTEGER . : INTEGER
+
+    :               shift and go to state 19
+
+
+state 15
+
+    (10) offense -> STRING - STRING .
+
+    $end            reduce using rule 10 (offense -> STRING - STRING .)
+    STRING          reduce using rule 10 (offense -> STRING - STRING .)
+
+
+state 16
+
+    (8) date -> INTEGER - INTEGER . - INTEGER
+
+    -               shift and go to state 20
+
+
+state 17
+
+    (10) offense -> STRING . - STRING
+
+    -               shift and go to state 11
+
+
+state 18
+
+    (12) data -> date time offense . day
+    (11) day -> . STRING
+
+    STRING          shift and go to state 21
+
+    day                            shift and go to state 22
+
+state 19
+
+    (9) time -> INTEGER : . INTEGER
+
+    INTEGER         shift and go to state 23
+
+
+state 20
+
+    (8) date -> INTEGER - INTEGER - . INTEGER
+
+    INTEGER         shift and go to state 24
+
+
+state 21
+
+    (11) day -> STRING .
+
+    $end            reduce using rule 11 (day -> STRING .)
+
+
+state 22
+
+    (12) data -> date time offense day .
+
+    $end            reduce using rule 12 (data -> date time offense day .)
+
+
+state 23
+
+    (9) time -> INTEGER : INTEGER .
+
+    STRING          reduce using rule 9 (time -> INTEGER : INTEGER .)
+
+
+state 24
+
+    (8) date -> INTEGER - INTEGER - INTEGER .
+
+    INTEGER         reduce using rule 8 (date -> INTEGER - INTEGER - INTEGER .)
+    $end            reduce using rule 8 (date -> INTEGER - INTEGER - INTEGER .)
+

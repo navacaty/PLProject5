@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PLProject5.iml" filepath="$PROJECT_DIR$/.idea/PLProject5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ListComprehension/ListComprehension.iml" filepath="$PROJECT_DIR$/ListComprehension/ListComprehension.iml" />
     </modules>
   </component>
 </project>
